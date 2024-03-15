@@ -1,6 +1,6 @@
 import express from 'express';
-import { PORT } from './config';
 import { logger } from './logger';
+require('dotenv').config();
 
 const server = express();
 
@@ -14,8 +14,9 @@ server.get('/v2/chains', (req, res) => {
 });
 
 const restServer = () => {
-  server.listen(PORT, '0.0.0.0', () => {
-    logger.info(`Server started at http://0.0.0.0:${PORT}`);
+  const PORT = process.env.PORT
+  server.listen(PORT, () => {
+    logger.info(`Server is running on port ${PORT}...`);
   });
 };
 
